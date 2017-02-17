@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+  <meta charset="UTF-8">
+  <meta name="google-signin-client_id" content="939512913851-mt4j5iv7gqflnhud1o8egf6r0cs8jmn8.apps.googleusercontent.com">
+
+  <title>Document</title>
+  <base href="/">
+  <link rel="stylesheet" href="/libs/fullcalendar/dist/fullcalendar.css">
+
+  <script src="/libs/jquery/dist/jquery.js"></script>
+  <script src="/libs/angular/angular.js"></script>
+  <script src="/libs/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="/libs/satellizer/dist/satellizer.js"></script>
+  <script src="/libs/moment/moment.js"></script>
+  <script src="/libs/fullcalendar/dist/fullcalendar.js"></script>
+  <script src="/libs/angular-ui-calendar.js"></script>
+  <script src="https://apis.google.com/js/platform.js"></script>
+  <!--<script src="/libs/gapi-helper.js"></script>-->
+
+  <script src="/angular/app.module.js"></script>
+  <script src="/angular/app.config.js"></script>
+  <script src="/angular/main/main.controller.js"></script>
+  <script src="/angular/auth/auth.controller.js"></script>
+  <script src="/angular/auth/auth.service.js"></script>
+  <script src="/angular/dashboard/calendar.controller.js"></script>
+  <script src="/angular/components/uicalendar/uicalendar.controller.js"></script>
+  <script src="/angular/components/uicalendar/calendarData.factory.js"></script>
+  <script src="/angular/components/uicalendar/eventSource.factory.js"></script>
+</head>
+<body ng-controller="MainController">
+  body wrapper
+  <ui-view></ui-view>
+  <!--<script>
+    gapi_helper.configure({
+      clientId: '939512913851-n6ec9s0n4pbt5n9qi4upp7esrhagmq81.apps.googleusercontent.com',
+      apiKey: 'AIzaSyCfTeqysgZ_ElscNwCnAXg_Wr2x8ikkJmQ',
+      discoveryDocs: ['https://people.googleapis.com/$discovery/rest?version=v1'],
+      scopes: 'https://www.googleapis.com/auth/calendar', //['https://www.googleapis.com/auth/calendar', 'https://www.googleapis.com/auth/plus.me'],
+      services: {
+        calendar: 'v3'
+        // plus: 'v1'
+      }
+    });
+    gapi_helper.when('authorized', function() {
+      window.location = "/dashboard";
+    });
+  </script>-->
+</body>
+</html>

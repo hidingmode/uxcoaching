@@ -1,0 +1,26 @@
+{
+  "name": "uxcoaching",
+  "description": "uxcoaching website",
+  "main": "",
+  "authors": [
+    "David Choo <davidchoo16@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/libs",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.6.2",
+    "angular-ui-router": "^0.4.2",
+    "jquery": "^3.1.1",
+    "fullcalendar": "^3.1.0",
+    "satellizer": "^0.15.5"
+  }
+}
