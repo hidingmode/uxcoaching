@@ -1,6 +1,7 @@
 angular
   .module('app', [
     'ui.router',
-    'satellizer',
+    'oc.lazyLoad',
+    'ui.bootstrap',
     'ui.calendar'
   ]);

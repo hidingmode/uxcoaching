@@ -6,7 +6,7 @@ var userSchema = new mongoose.Schema({
 	first_name: String,
 	last_name: String,
 	picture: String,
-	roles: { type: [String], enum: ['admin', 'coach', 'customer'] },
+	roles: { type: [String], enum: ['admin', 'coach', 'trainee'] },
 	google: String,
 	calendars: [String],
 	coach: {

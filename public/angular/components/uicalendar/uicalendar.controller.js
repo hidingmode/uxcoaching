@@ -35,7 +35,6 @@ angular.module('app')
 function uicalendar() {
   return {
     templateUrl: '/angular/components/uicalendar/uicalendar.component.html',
-    controller: UICalendarController,
-    controllerAs: 'vm'
+    controller: UICalendarController
   };
 }

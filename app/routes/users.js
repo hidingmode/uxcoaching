@@ -16,7 +16,7 @@ var ensureAuthenticated = require('../services/ensureAuthenticated');
 //   res.send('respond with a resource');
 // });
 
-router.post('/login', function(req, res) {
+router.post('/register', function(req, res) {
   client.verifyIdToken(
     req.body.access_token,
     config.GOOGLE_CLIENT_ID,
@@ -29,6 +29,12 @@ router.post('/login', function(req, res) {
             req.session.jwt = token;
             return res.send({ token: token });
           }
+          if(req.body.roles.length == 0) {
+            return res.status(400).send({ message: 'please select at least 1 role' });
+          }
+          // if(req.body.roles.length == 0 && req.url == '/login') {
+          //   return res.redirect('/register');
+          // }
           var user = new User();
           user.google = profile.sub;
           user.first_name = profile.given_name;
@@ -38,7 +44,7 @@ router.post('/login', function(req, res) {
           user.roles = req.body.roles;
           if(req.body.roles.includes('coach')) {
             user.coach = { calendlyUrl: config.coaching_calendar_id };
-            user.calendars = ['uxconsulting.com.sg_nrjfapghj2au0ipie4fre23lqs@group.calendar.google.com'];
+            user.calendars = [auth.coaching_calendar_id];
           }
           user.save(function(err) {
             if(err) res.status(400).send({ message: 'something wrong while saving to db' });
@@ -46,6 +52,28 @@ router.post('/login', function(req, res) {
             req.session.jwt = token;
             res.send({ token: token });
           });
+        } catch (e) {
+          res.status(500).send({ message: 'something wrong' });
+        }
+      });
+    });
+});
+
+router.post('/login', function(req, res) {
+  client.verifyIdToken(
+    req.body.access_token,
+    config.GOOGLE_CLIENT_ID,
+    function(e, login) {
+      var profile = login.getPayload();
+      User.findOne({ google: profile.sub }, function(err, existingUser) {
+        try {
+          if (existingUser) {
+            var token = createJWT(existingUser);
+            req.session.jwt = token;
+            return res.send({ token: token });
+          } else {
+            return res.redirect('/register');
+          }
         } catch (e) {
           res.status(500).send({ message: 'something wrong' });
         }
