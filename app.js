@@ -49,6 +49,7 @@ app.use('/css', express.static(path.join(__dirname, '/public/css')));
 app.use('/fonts', express.static(path.join(__dirname, '/public/fonts')));
 app.use('/views', express.static(path.join(__dirname, '/public/views')));
 app.use('/libs', express.static(path.join(__dirname, '/public/libs')));
+app.use('/js', express.static(path.join(__dirname, '/public/js')));
 app.use('/angular', express.static(path.join(__dirname, '/public/angular')));
 
 app.all('/*', ensureAuthenticated, function(req, res) {
