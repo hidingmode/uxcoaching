@@ -4,8 +4,8 @@ var User = require('../models/users');
 
 module.exports = function ensureAuthenticated(req, res, next) {
   if (!req.header('Authorization') && !req.session.jwt) {
-    // return res.redirect('/login');
-    return res.status(401).send({ message: 'user not logged in' });
+    return res.redirect('/login');
+    // return res.status(401).send({ message: 'user not logged in' });
   }
   var token = req.header('Authorization') ? req.header('Authorization').split(' ')[1] : req.session.jwt;
 

@@ -35,14 +35,13 @@ app.use(cookieParser());
 app.use(session({ secret: 'WsmRHJbDbTnBLQPT' })); // secret is random string
 
 // app.use('/', index);
-app.use('api/users', users);
+app.use('/api/users', users);
 // app.use('/auth', express.static(path.join(__dirname, 'public/index.html')));
 // app.use(express.static(path.join(__dirname, 'public')));
-
-app.get('/register', function(req, res) {
+app.get('/login', function(req, res) {
   res.sendFile(path.join(__dirname, '/public/index.html'));
 });
-app.get('/login', function(req, res) {
+app.get('/register', function(req, res) {
   res.sendFile(path.join(__dirname, '/public/index.html'));
 });
 
