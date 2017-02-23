@@ -4,7 +4,8 @@ var User = require('../models/users');
 
 module.exports = function ensureAuthenticated(req, res, next) {
   if (!req.header('Authorization') && !req.session.jwt) {
-    return res.redirect('/login');
+    // return res.redirect('/login');
+    return res.status(401).send({ message: 'user not logged in' });
   }
   var token = req.header('Authorization') ? req.header('Authorization').split(' ')[1] : req.session.jwt;
 
@@ -13,13 +14,13 @@ module.exports = function ensureAuthenticated(req, res, next) {
     payload = jwt.decode(token, config.TOKEN_SECRET);
   }
   catch (err) {
-    return res.redirect('/login');
-    // return res.status(401).send({ message: err.message });
+    // return res.redirect('/login');
+    return res.status(401).send({ message: err.message });
   }
 
   // jwt expiry (i dont implement because no time)
   if (payload.exp <= new Date().valueOf()) {
-    return res.redirect('/login');
+    // return res.redirect('/login');
     return res.status(401).send({ message: 'Token has expired' });
   }
   if(payload.sub)
