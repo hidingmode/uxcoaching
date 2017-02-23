@@ -1,5 +1,6 @@
-
 public/libs
+!public/libs/angular-ui-calendar.js
+!public/libs/oclazyload
 
 # Logs
 logs
