@@ -26,7 +26,8 @@
     "metisMenu": "metismenu#^2.6.2",
     "jquery-slimscroll": "slimScroll#^1.3.8",
     "PACE": "pace#^1.0.2",
-    "angular-bootstrap": "^2.5.0"
+    "angular-bootstrap": "^2.5.0",
+    "oclazyload": "^1.1.0"
   },
   "resolutions": {
     "jquery": "^3.1.1",
