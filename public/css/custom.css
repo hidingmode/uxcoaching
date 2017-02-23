@@ -1,0 +1,9 @@
+.google-sign-in-wrapper {
+	display: flex;
+	justify-content: center;
+}
+
+.middle-box h1 {
+	margin-left: -18px; /* correction on slight indentation to the right, no idea why */
+	font-size: 120px;
+}

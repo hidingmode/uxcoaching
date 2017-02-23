@@ -38,14 +38,26 @@ app.use(session({ secret: 'WsmRHJbDbTnBLQPT' })); // secret is random string
 app.use('/api/users', users);
 // app.use('/auth', express.static(path.join(__dirname, 'public/index.html')));
 // app.use(express.static(path.join(__dirname, 'public')));
-app.all('/dashboard*', ensureAuthenticated, function(req, res) {
+
+app.get('/register', function(req, res) {
   res.sendFile(path.join(__dirname, '/public/index.html'));
 });
+app.get('/login', function(req, res) {
+  res.sendFile(path.join(__dirname, '/public/index.html'));
+});
+
+app.use('/css', express.static(path.join(__dirname, '/public/css')));
+app.use('/fonts', express.static(path.join(__dirname, '/public/fonts')));
+app.use('/views', express.static(path.join(__dirname, '/public/views')));
 app.use('/libs', express.static(path.join(__dirname, '/public/libs')));
 app.use('/angular', express.static(path.join(__dirname, '/public/angular')));
-app.get('*', function(req, res) {
+
+app.all('/*', ensureAuthenticated, function(req, res) {
   res.sendFile(path.join(__dirname, '/public/index.html'));
 });
+// app.get('*', function(req, res) {
+//   res.sendFile(path.join(__dirname, '/public/index.html'));
+// });
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -22,6 +22,9 @@ function UserData($window) {
     },
     getJwt: function() {
       return store.jwt;
+    },
+    clearJwt: function() {
+      store.jwt = null;
     }
   };
 }
@@ -30,11 +33,11 @@ AuthFactory.$inject = ['$q', '$http', 'UserData'];
 
 function AuthFactory($q, $http, UserData) {
   return {
-    loginUser: function(user) {
+    registerUser: function(user) {
       UserData.setCurrentUser(user);
       return $q(function(resolve, reject) {
         $http({
-          url: '/api/users/login',
+          url: '/api/users/register',
           method: 'post',
           data: {
             access_token: user.access_token,
@@ -47,6 +50,39 @@ function AuthFactory($q, $http, UserData) {
           reject(err);
         });
       });
+    },
+    loginUser: function(user) {
+      UserData.setCurrentUser(user);
+      return $q(function(resolve, reject) {
+        $http({
+          url: '/api/users/login',
+          method: 'post',
+          data: {
+            access_token: user.access_token,
+            roles: user.roles
+          }
+        }).then(function(res) {
+          if(res.data.token) {
+            UserData.setJwt(res.data.token);
+            resolve(UserData.getCurrentUser());
+          } else {
+            reject('user not found');
+          }
+        }, function(err) {
+          reject(err);
+        });
+      });
+    },
+    logoutUser: function() {
+      UserData.clearJwt();
+      return gapi.auth2.getAuthInstance().signOut();
+      // return $q(function(resolve, reject) {
+        
+      //   gapi.load('client', function() {
+      //     gapi.auth.signOut();
+      //     resolve();
+      //   });
+      // });
     }
   };
 }
